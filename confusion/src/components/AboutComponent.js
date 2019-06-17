@@ -2,27 +2,26 @@ import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-function RenderLeader({leaders}) {
+function RenderLeader({ leaders }) {
     if (leaders != null) {
         return (
             <div className="container">
-                    {leaders.map((leader) => {
-                        return (
-                            <div className="row mt-4 mr-auto ml-auto">
-                                <div className="col-12 col-md-2">
-                                    <img src={leader.image} />
-                                </div>
-                                <div className="col-12 col-md-8 ">
-                                    <h3>{leader.name}</h3>  
-                                    <p>{leader.designation}</p>   
-                                    <p>{leader.description}</p>          
-                                </div>
-                            </div>
-                        )
-                        
-                    })}
+                {leaders.map((leader) => {
+                    return (
+                        <div key={leader.id} className="row mt-4 mr-auto ml-auto">
+                            <Media>
+                                <img className="ml-3 mr-5" src={leader.image} alt={leader.name} />          
+                                <Media body>
+                                    <Media heading>{leader.name}</Media>
+                                    <p>{leader.designation}</p>
+                                    <p>{leader.description}</p>
+                                    
+                                </Media>
+                            </Media>
+                        </div>
+                    )
+                })}
             </div>
-            
         )
     }
 }
@@ -90,9 +89,7 @@ function About(props) {
                     <h2>Corporate Leadership</h2>
                 </div>
                 <div className="col-12">
-                    <Media list>
-                        <RenderLeader leaders={props.leaders} />
-                    </Media>
+                    <RenderLeader leaders={props.leaders} />
                 </div>
             </div>
         </div>
