@@ -5,7 +5,6 @@ import {
 } from 'reactstrap';
 
 function RenderCard({ item }) {
-
     return (
         <Card>
             <CardImg src={item.image} alt={item.name} />
@@ -16,10 +15,10 @@ function RenderCard({ item }) {
             </CardBody>
         </Card>
     );
-
 }
 
 function Home(props) {
+    console.log()
     return (
         <div className="container">
             <div className="row align-items-start">
