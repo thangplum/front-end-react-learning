@@ -1,20 +1,26 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader, ModalBody, Label, Row, Col } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
-import {baseUrl} from '../shared/baseUrl';
+import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 function RenderDish({ dish }) {
     if (dish != null) {
         return (
-            <Card key={dish.id}>
-                <CardImg width="100%" object src={baseUrl + dish.image} alt={dish.name}></CardImg>
-                <CardBody>
-                    <CardTitle>{dish.name}</CardTitle>
-                    <CardText>{dish.description}</CardText>
-                </CardBody>
-            </Card>
+            <FadeTransform in
+                transformProps={{
+                    exitTransform: 'scale(0.5) translateY(-50%)'
+                }}>
+                <Card>
+                    <CardImg top src={baseUrl + dish.image} alt={dish.name} />
+                    <CardBody>
+                        <CardTitle>{dish.name}</CardTitle>
+                        <CardText>{dish.description}</CardText>
+                    </CardBody>
+                </Card>
+            </FadeTransform>
         );
     }
     else {
@@ -38,14 +44,18 @@ function RenderComments({ comments, postComment, dishId }) {
             );
 
             return (
-                <div>
-                    <ul key={comment.id} className="list-unstyled">
-                        <li>{comment.comment}</li>
-                        <li>
-                            -- {comment.author}, {formattedDate}
-                        </li>
-                    </ul>
-                </div>
+                <Stagger in>
+                    <Fade in>
+                        <div>
+                            <ul key={comment.id} className="list-unstyled">
+                                <li>{comment.comment}</li>
+                                <li>
+                                    -- {comment.author}, {formattedDate}
+                                </li>
+                            </ul>
+                        </div>
+                    </Fade>
+                </Stagger>
             );
         });
         return (
